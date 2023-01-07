@@ -2,18 +2,18 @@
   <form @submit.prevent="handleRegister">
     <!-- Display Name -->
     <input
-      v-model="displayName"
+      v-model="displayNameRef"
       placeholder="Display name"
       type="text"
       required
     />
 
     <!-- Email -->
-    <input v-model="email" placeholder="Your email" type="email" required />
+    <input v-model="emailRef" placeholder="Your email" type="email" required />
 
     <!-- Password -->
     <input
-      v-model="password"
+      v-model="passwordRef"
       placeholder="Create password"
       type="password"
       required
@@ -25,25 +25,40 @@
 </template>
 
 <script>
+import useRegister from '@/composable/useRegister';
 import { ref } from 'vue';
 
 export default {
   setup() {
-    // refs
-    const displayName = ref('');
-    const email = ref('');
-    const password = ref('');
+    const { register, errorRef } = useRegister();
 
-    const handleRegister = () => {
-      console.log(displayName.value);
-      console.log(email.value);
-      console.log(password.value);
+    // refs
+    const displayNameRef = ref('');
+    const emailRef = ref('');
+    const passwordRef = ref('');
+
+    const handleRegister = async () => {
+      const response = await register({
+        displayNameRef,
+        emailRef,
+        passwordRef,
+      });
+
+      if (response) {
+        console.log('success');
+      } else {
+        console.log('error');
+      }
+
+      if (errorRef.value) {
+        console.log(errorRef.value);
+      }
     };
 
     return {
-      displayName,
-      email,
-      password,
+      displayNameRef,
+      emailRef,
+      passwordRef,
       handleRegister,
     };
   },
