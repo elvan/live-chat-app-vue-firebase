@@ -2,22 +2,27 @@
   <form @submit.prevent="handleRegister">
     <!-- Display Name -->
     <input
-      v-model="displayNameRef"
+      v-model="displayName"
       placeholder="Display name"
       type="text"
       required
     />
 
     <!-- Email -->
-    <input v-model="emailRef" placeholder="Your email" type="email" required />
+    <input v-model="email" placeholder="Your email" type="email" required />
 
     <!-- Password -->
     <input
-      v-model="passwordRef"
+      v-model="password"
       placeholder="Create password"
       type="password"
       required
     />
+
+    <!-- Error -->
+    <div v-if="error" class="error">
+      {{ error }}
+    </div>
 
     <!-- Register button -->
     <button type="submit">Register</button>
@@ -30,36 +35,32 @@ import { ref } from 'vue';
 
 export default {
   setup() {
-    const { register, errorRef } = useRegister();
+    const { register, error } = useRegister();
 
     // refs
-    const displayNameRef = ref('');
-    const emailRef = ref('');
-    const passwordRef = ref('');
+    const displayName = ref('');
+    const email = ref('');
+    const password = ref('');
 
     const handleRegister = async () => {
-      const response = await register({
-        displayNameRef,
-        emailRef,
-        passwordRef,
+      await register({
+        displayName: displayName.value,
+        email: email.value,
+        password: password.value,
       });
 
-      if (response) {
-        console.log('success');
-      } else {
-        console.log('error');
-      }
-
-      if (errorRef.value) {
-        console.log(errorRef.value);
-      }
+      // reset form
+      displayName.value = '';
+      email.value = '';
+      password.value = '';
     };
 
     return {
-      displayNameRef,
-      emailRef,
-      passwordRef,
+      displayName,
+      email,
+      password,
       handleRegister,
+      error,
     };
   },
 };

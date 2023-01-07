@@ -1,16 +1,16 @@
 import { projectAuth } from '@/firebase/config';
 import { ref } from 'vue';
 
-const errorRef = ref(null);
+const error = ref(null);
 
-const register = async ({ displayNameRef, emailRef, passwordRef }) => {
-  errorRef.value = null;
+const register = async ({ displayName, email, password }) => {
+  error.value = null;
 
   try {
     // register user
     const response = await projectAuth.createUserWithEmailAndPassword(
-      emailRef.value,
-      passwordRef.value
+      email,
+      password
     );
 
     if (!response.user) {
@@ -18,24 +18,22 @@ const register = async ({ displayNameRef, emailRef, passwordRef }) => {
     }
 
     // update user profile
-    await response.user.updateProfile({ displayName: displayNameRef.value });
+    await response.user.updateProfile({ displayName });
 
-    errorRef.value = null;
+    // reset error
+    error.value = null;
 
-    emailRef.value = null;
-    passwordRef.value = null;
-    displayNameRef.value = null;
-
-    return response;
+    console.log('User registered');
   } catch (err) {
-    errorRef.value = err.message;
+    console.log(err.message);
+    error.value = err.message;
   }
 };
 
 const useRegister = () => {
   return {
     register,
-    errorRef,
+    error,
   };
 };
 
