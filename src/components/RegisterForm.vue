@@ -3,19 +3,19 @@
     <!-- Display Name -->
     <input
       v-model="displayName"
-      type="text"
       placeholder="Display name"
+      type="text"
       required
     />
 
     <!-- Email -->
-    <input v-model="email" placeholder="Email" type="Your email" required />
+    <input v-model="email" placeholder="Your email" type="email" required />
 
     <!-- Password -->
     <input
       v-model="password"
-      type="password"
       placeholder="Create password"
+      type="password"
       required
     />
 
