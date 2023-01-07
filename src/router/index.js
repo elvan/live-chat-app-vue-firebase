@@ -7,11 +7,6 @@ const routes = [
     name: 'Welcome',
     component: Welcome,
   },
-  {
-    path: '/register',
-    name: 'Register',
-    component: RegisterForm,
-  },
 ];
 
 const router = createRouter({
