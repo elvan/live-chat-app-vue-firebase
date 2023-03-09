@@ -2,7 +2,6 @@ body {
   background: #e3e1ff;
   color: #444;
 }
-
 .container {
   width: 90%;
   max-width: 960px;
@@ -11,12 +10,10 @@ body {
   box-shadow: 2px 4px 6px rgba(28, 6, 49, 0.1);
   background: white;
 }
-
 .error {
   color: #ff3f80;
   font-size: 14px;
 }
-
 button {
   text-decoration: none;
   background: #5ae4ca;
