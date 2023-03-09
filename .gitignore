@@ -23,4 +23,4 @@ pnpm-debug.log*
 *.sw?
 
 ###
-config/firebaseConfig.js
+src/firebase/firebaseConfig.js
