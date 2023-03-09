@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import useRegister from '@/composable/useRegister';
+import useRegister from '@/composables/useRegister';
 import { ref } from 'vue';
 
 export default {
